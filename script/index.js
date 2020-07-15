@@ -3,8 +3,8 @@ const guideList = document.querySelector('.guides');
 
 // setup guides
 const setupGuides = (data) => {
-
-  let html = '';
+  if(data.length){
+    let html = '';
   data.forEach(doc => {
     const guide = doc.data();
     const li = `
@@ -17,6 +17,11 @@ const setupGuides = (data) => {
   });
   guideList.innerHTML = html
 
+  }else{
+    guideList.innerHTML = '<h5 class = "center-align">login to view guides</h5>'
+  }
+
+  
 };
 
 
