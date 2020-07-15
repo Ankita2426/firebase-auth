@@ -6,12 +6,14 @@ auth.onAuthStateChanged( user => {
    if(user){
       // console.log("logging in",user);
       db.collection('guidez').get().then(snapshot =>{
-        console.log(snapshot.docs);
+       // console.log(snapshot.docs);
         setupGuides(snapshot.docs);
+        setUpUI(user);
      });
    }else{
        //console.log("logged out");
        setupGuides([]);
+       setUpUI();
    }
 });
 
