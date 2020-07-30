@@ -7,6 +7,7 @@ const accountDetails = document.querySelector('.account-details');
 const setUpUI =  (user) => {
   if(user){
     //account info
+    db.collection('users').doc(user.uid).get().then(doc =>{})
     const html = `
     <div> logged in as ${user.email}</div>
     `;

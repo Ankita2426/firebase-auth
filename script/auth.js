@@ -9,9 +9,9 @@ auth.onAuthStateChanged( user => {
        // console.log(snapshot.docs);
         setupGuides(snapshot.docs);
         setUpUI(user);
-     }).catch(err =>{
-         console.log(err.message)
-     })
+     }, err => {
+        console.log(err.message)
+     });
    }else{
        //console.log("logged out");
        setupGuides([]);
@@ -47,10 +47,15 @@ signupForm.addEventListener('submit',(e) =>{
     //console.log(email,password);
     //signup the user
     auth.createUserWithEmailAndPassword(email,password).then(cred => {
-        console.log(cred.user);
-        const modal = document.querySelector('#modal-signup');
-        M.Modal.getInstance(modal).close();
-        signupForm.reset(); 
+        return db.collection('users').doc(cred.user.uid).set({
+            bio: signupForm['signup-bio'].value
+        });
+      //  console.log(cred.user);
+      
+        }).then(() => {
+            const modal = document.querySelector('#modal-signup');
+            M.Modal.getInstance(modal).close();
+            signupForm.reset(); 
     }); 
 });
     //logout
